@@ -1,0 +1,85 @@
+
+
+.dashbord{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  background-color:#e7d5be;
+}
+
+.btn-user {
+  flex-basis: 20%;
+    background-color:var(--seconed-color);
+    height: calc(100vh - 74px);
+    padding-left: 50px;
+  
+
+}
+
+.btn-user a {
+  color:var(--main-color);
+  cursor: pointer;
+  font-weight: 600;
+  display: block;
+  letter-spacing: 2px;
+  padding: 10px;
+}
+.container-users {
+  flex-basis: 80%;
+  padding-right: 50px;
+  padding-top: 20px;
+  padding-left: 20px;
+  background-color: var(--main-color);;
+}
+.table-users {
+  width: 100%;
+  border: 1px solid var(--bg-color);
+  box-shadow: 0px 0px 5px 1px #2d1c0775;
+  padding: 20px;
+  border-radius: 6px;
+}
+.table-users td {
+  text-align: center;
+}
+
+.table-users td{
+  margin-bottom: 15px;
+
+}
+.table-users  th {
+  color: var(--seconed-color);
+  text-transform: capitalize;
+}
+
+.container-icons {
+  display: flex;
+  justify-content: center;
+  column-gap: 20px;
+}
+
+.container-icons div , .container-icons div a{
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.container-icons div a {
+  color: var(--main-color);
+  background: var(--color-hover);
+}
+.container-icons div:first-child {
+  background: red;
+  color: var(--main-color);
+}
+
+
+/* Page up date  */
+.page-update-user > h3 {
+  color: var(--color-hover);
+  font-size: 30px;
+  margin: 10;
+}
+

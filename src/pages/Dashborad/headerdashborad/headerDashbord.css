@@ -1,0 +1,18 @@
+
+
+
+.header-dashbord {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color:var(--bg-color);
+  height: 74px;
+  padding: 10px  50px;
+}
+.header-dashbord > div {
+  color: var(--seconed-color);
+  padding: 10px;
+}
+.header-dashbord a {
+  color: var(--seconed-color)
+}
