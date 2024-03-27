@@ -80,7 +80,7 @@ function Login() {
           </div>
 
           <div>
-            <input value={"Send"} type="submit" />
+            <button  className="btn"  >Send</button>
           </div>
         </form>
       </div>

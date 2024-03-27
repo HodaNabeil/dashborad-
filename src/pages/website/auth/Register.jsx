@@ -18,7 +18,7 @@ function Register() {
 
   const usernew = useContext(UserContext);
 
-
+console.log(usernew);
 
   const  nav =useNavigate()
 
@@ -35,21 +35,20 @@ function Register() {
         password_confirmation: passwordConfirmation,
       });
     
-      console.log("Registration successful:", res);
-    
+
       const token = res.data.data.token;
       const  userDetails = res.data.data.user;
 
 
-      usernew.setAuth({token}) //undefined
+      usernew.setAuth({token,userDetails }) //undefined
 
-      console.log(  usernew.setAuth({token})) //undefined
+       //undefined
     
-      console.log("User details:", userDetails); //200
+      console.log(token, userDetails); //200
 
-      console.log(token); //200
+     //200
     
-      // nav("/dashboard"); 
+      nav("/dashboard"); 
     } catch (error) {
       console.error("Registration failed:", error);
       if (error.response && error.response.status === 422) {
