@@ -1,13 +1,14 @@
 import { useContext } from "react";
-import { User } from "../../../context/context";
+import {  UserContext } from "../../../context/context";
 import { Navigate, Outlet} from "react-router-dom";
 
 function RequireAuth() {
-  const user = useContext(User);
+  const user = useContext(UserContext);
 
-  return  user.auth.dateDetails ?(
+  console.log(user)
+
+  return  UserContext.auth.dateDetails ?(
     <Outlet />
-
   ) : (
     <Navigate to={"/login"} />
   );
