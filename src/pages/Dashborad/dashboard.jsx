@@ -1,8 +1,8 @@
 
-import { useContext } from "react";
-import { User } from "../../context/context";
+
+
 import Sidebar from "./Sidebar"
-import HeaderDashbord from "./headerdashborad/HeaderDashbord"
+import HeaderDashbord from "./headerdashborad/HeaderDashborad"
 
 
 function Dashbord() {

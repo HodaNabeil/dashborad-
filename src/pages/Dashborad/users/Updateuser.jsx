@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import Form from "../../../Components/Form/Form";
+
 
 
 function Updateuser() {
@@ -25,7 +25,7 @@ function Updateuser() {
 
       <div className=" page-update-user">
       <h3>Updating data</h3>
-          <Form
+          {/* <Form
             button={"Update"}
             name={name}
             email={email}
@@ -33,7 +33,7 @@ function Updateuser() {
             hasLocalStorge={false}
             navigate="dashbord/users"
             styleUpdate={true}
-          ></Form>
+          ></Form> */}
   
       </div>
 

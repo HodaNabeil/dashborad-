@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/website/Home";
 import Register from "./pages/website/auth/Register";
 import Login from "./pages/website/auth/Login";
-import Dashbord from "./pages/Dashborad/Dashbord";
+import Dashbord from "./pages/Dashborad/dashboard";
 import Updateuser from "./pages/Dashborad/users/Updateuser";
 import Createuser from "./pages/Dashborad/users/Createuser";
 import Users from "./pages/Dashborad/users/Users";

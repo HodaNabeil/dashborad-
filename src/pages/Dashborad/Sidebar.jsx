@@ -1,7 +1,7 @@
 import { Link, Outlet } from "react-router-dom"
 
 
-import "../Dashborad/dashbord.css"
+import "../Dashborad/dashboard.css"
 
 function Sidebar() {
 

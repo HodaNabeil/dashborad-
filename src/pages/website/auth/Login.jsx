@@ -1,51 +1,53 @@
 import Header from "../../../Components/Header/Header";
 
-import "../../../Components/Form/form.css"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../context/Usecontext";
 
 function Login() {
-
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
 
-  const [emailError,setEmailError] =useState("")
-  const [accept,setAccept] =useState(false)
-    async function sumbit(e) {
-      e.preventDefault();
-      setAccept(true)
-      let send = false;
+  const [emailError, setEmailError] = useState(false);
+  const [accept, setAccept] = useState(false);
 
-        if( password.length < 6 ) {
-          send = false
-        }else send = true
+  const usernew = useContext(UserContext);
 
-      try{
-        if(send) {
-          const res = await axios.post("http://127.0.0.1:8000/api/login",{
-            email: email,
-            password: password,
-          })
-          console.log(res)
-          if(res.status === 200) {
-            window.localStorage.setItem("email",email);
-            window.location.pathname="/"
-          }
+  const nav = useNavigate();
 
-        }
-      }catch (error) {
-          setEmailError(error.response.status)
+  async function sumbit(e) {
+    e.preventDefault();
+
+    setAccept(true);
+
+    try {
+      const res = await axios.post(`http://127.0.0.1:8000/api/login`, {
+        email: email,
+        password: password,
+      });
+
+      const token = res.data.data.token;
+      const userDetails = res.data.data.user;
+
+      usernew.setAuth({ token, userDetails });
+
+      nav("/dashboard");
+    } catch (error) {
+      console.error("Registration failed:", error);
+      if (error.response && error.response.status === 422) {
+        setEmailError(true);
       }
-
-
-    
+      setAccept(true);
     }
+  }
+
   return (
     <>
       <Header />
+
       <div className="container-form">
         <form onSubmit={sumbit}>
-          
           <div>
             <label htmlFor="password">Password</label>
             <input
@@ -54,15 +56,17 @@ function Login() {
               id="password"
               type="password"
               placeholder="Password"
-              required
               autoComplete="new-password"
+              aria-hidden="true"
             />
 
-            {
-              password.length < 6  && accept &&  <span className=" error">A minimum of 6 characters is required</span> 
-            }
-
+            {password.length < 8 && accept && (
+              <span className=" error">
+                A minimum of 8 characters is required
+              </span>
+            )}
           </div>
+
           <div>
             <label htmlFor="email">Email</label>
             <input
@@ -73,19 +77,21 @@ function Login() {
               placeholder="E-mail"
               required
               autoComplete="new-Email"
+              aria-hidden="true"
             />
-            {
-              accept && emailError === 422 && <span className="error">The email has already been taken</span>
-            }
+
+            {accept && emailError === 422 && (
+              <span className="error">The email has already been taken</span>
+            )}
           </div>
 
           <div>
-            <button  className="btn"  >Send</button>
+            <button className="btn ">Login</button>
           </div>
         </form>
       </div>
     </>
-  )
+  );
 }
 
-export default Login
+export default Login;

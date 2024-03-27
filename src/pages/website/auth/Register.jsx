@@ -5,7 +5,7 @@ import Header from "../../../Components/Header/Header";
 
 import { useContext,  useState } from "react";
 import axios from "axios";
-import {  UserContext } from "../../../context/context";
+import {  UserContext } from "../../../context/Usecontext";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
@@ -18,7 +18,6 @@ function Register() {
 
   const usernew = useContext(UserContext);
 
-console.log(usernew);
 
   const  nav =useNavigate()
 
@@ -38,16 +37,8 @@ console.log(usernew);
 
       const token = res.data.data.token;
       const  userDetails = res.data.data.user;
+      usernew.setAuth({token,userDetails }) 
 
-
-      usernew.setAuth({token,userDetails }) //undefined
-
-       //undefined
-    
-      console.log(token, userDetails); //200
-
-     //200
-    
       nav("/dashboard"); 
     } catch (error) {
       console.error("Registration failed:", error);
@@ -58,7 +49,7 @@ console.log(usernew);
     }
     
   }
-  // console.log(usernew)
+
   return (
     <>
       <Header />
