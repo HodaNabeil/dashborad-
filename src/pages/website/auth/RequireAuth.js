@@ -7,8 +7,7 @@ function RequireAuth() {
 
   const location =useLocation()
 
-
-  return Object.keys(user.auth).length > 0 ? (
+  return  user.auth.userDetails ? (
     <Outlet />
   ) : (
     <Navigate  state={{from:location}} replace to={"/login"} />

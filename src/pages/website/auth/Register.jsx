@@ -7,6 +7,7 @@ import { useContext,  useState } from "react";
 import axios from "axios";
 import {  UserContext } from "../../../context/Usecontext";
 import { useNavigate } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 function Register() {
   const [name, setName] = useState("");
@@ -18,6 +19,12 @@ function Register() {
 
   const usernew = useContext(UserContext);
 
+
+  // Cookeis 
+
+  const  cookie = new Cookies()
+
+  
 
   const  nav =useNavigate()
 
@@ -34,15 +41,21 @@ function Register() {
         password_confirmation: passwordConfirmation,
       });
     
-
+    
       const token = res.data.data.token;
-      const  userDetails = res.data.data.user;
-      usernew.setAuth({token,userDetails }) 
 
+      const  userDetails = res.data.data.user;
+
+
+      console.log(token)
+      
+      usernew.setAuth({token,userDetails }) 
+  
+      cookie.set("Bearer" ,token ,{path:"/dashboard/users"});
       nav("/dashboard"); 
     } catch (error) {
       console.error("Registration failed:", error);
-      if (error.response && error.response.status === 422) {
+      if (error.response && error.response.status === 401) {
         setEmailError(true);
       }
       setAccept(true);
@@ -120,7 +133,7 @@ function Register() {
               aria-hidden="true"
             />
 
-            {accept && emailError === 422 && (
+            {accept && emailError === 401 && (
               <span className="error">The email has already been taken</span>
             )}
           </div>

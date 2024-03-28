@@ -4,15 +4,21 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../context/Usecontext";
+import Cookies from "universal-cookie";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
 
   const [emailError, setEmailError] = useState(false);
+  
   const [accept, setAccept] = useState(false);
 
   const usernew = useContext(UserContext);
+
+  //  cookie
+  
+  const  cookie = new Cookies()
 
   const nav = useNavigate();
 
@@ -28,6 +34,9 @@ function Login() {
       });
 
       const token = res.data.data.token;
+
+      cookie.set("Bearer" ,token,{path:"/dashboard/users"});
+
       const userDetails = res.data.data.user;
 
       usernew.setAuth({ token, userDetails });
@@ -35,7 +44,7 @@ function Login() {
       nav("/dashboard");
     } catch (error) {
       console.error("Registration failed:", error);
-      if (error.response && error.response.status === 422) {
+      if (error.response.status === 401) {
         setEmailError(true);
       }
       setAccept(true);
@@ -80,8 +89,8 @@ function Login() {
               aria-hidden="true"
             />
 
-            {accept && emailError === 422 && (
-              <span className="error">The email has already been taken</span>
+            { accept && emailError &&  (
+              <span className="error">Wrong Email or password</span>
             )}
           </div>
 
