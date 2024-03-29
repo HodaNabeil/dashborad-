@@ -47,6 +47,7 @@ function Newproduct() {
     }
   }
 
+  console.log(iamge)
   return (
     <div className="container-form">
       <form onSubmit={sumbit}>
