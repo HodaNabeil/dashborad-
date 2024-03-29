@@ -1,10 +1,7 @@
-
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../context/Usecontext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
-
 
 function Updateuser() {
   const [name, setName] = useState("");
@@ -17,15 +14,11 @@ function Updateuser() {
   const id = window.location.pathname.split("/").slice(-1)[0];
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:8000/api/user/showbyid/${id}` ,
-    {
+    fetch(`http://127.0.0.1:8000/api/user/showbyid/${id}`, {
       headers: {
         Authorization: "Bearer " + token,
       },
-    } 
-    
-    
-    )
+    })
       .then((res) => res.json())
       .then((date) => {
         setName(date[0].name);
@@ -33,17 +26,11 @@ function Updateuser() {
       });
   }, []);
 
-
-
-
-
-
   const contextToken = useContext(UserContext);
 
   const token = contextToken.auth.token;
-  
 
-  const  nav =useNavigate()
+  const nav = useNavigate();
 
   async function sumbit(e) {
     e.preventDefault();
@@ -51,20 +38,22 @@ function Updateuser() {
     setAccept(true);
 
     try {
-      const res = await axios.post(`http://127.0.0.1:8000/api/user/update/${id}`, {
-        name: name,
-        email: email,
-        password: password,
-        password_confirmation: passwordConfirmation,
-      } ,
-      {
-        headers: {
-          Authorization: "Bearer " + token,
+      const res = await axios.post(
+        `http://127.0.0.1:8000/api/user/update/${id}`,
+        {
+          name: name,
+          email: email,
+          password: password,
+          password_confirmation: passwordConfirmation,
         },
-      }    
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        }
       );
 
-      nav("/dashboard/users"); 
+      nav("/dashboard/users");
     } catch (error) {
       console.error("Registration failed:", error);
       if (error.response && error.response.status === 401) {
@@ -72,100 +61,88 @@ function Updateuser() {
       }
       setAccept(true);
     }
-    
   }
 
   return (
-
-      <div className=" page-update-user">
+    <div className=" page-update-user">
       <h3>Updating data</h3>
-          {/* <Form
-            button={"Update"}
-            name={name}
-            email={email}
-            endpoint={`user/update/${id}`}
-            hasLocalStorge={false}
-            navigate="dashbord/users"
-            styleUpdate={true}
-          ></Form> */}
       <div className="container-form">
-    <form onSubmit={sumbit}>
-      <div>
-        <label htmlFor="name">Name</label>
-        <input
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          id="name"
-          type="text"
-          placeholder="Name"
-          aria-hidden="true"
-        />
-        {name.length < 2  && accept && (
-          <span className="error">Name required</span>
-        )}
+        <form onSubmit={sumbit}>
+          <div>
+            <label htmlFor="name">Name</label>
+            <input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              id="name"
+              type="text"
+              placeholder="Name"
+              aria-hidden="true"
+            />
+            {name.length < 2 && accept && (
+              <span className="error">Name required</span>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="password">Password</label>
+            <input
+              value={password}
+              onChange={(e) => setpassword(e.target.value)}
+              id="password"
+              type="password"
+              placeholder="Password"
+              autoComplete="new-password"
+              aria-hidden="true"
+            />
+
+            {password.length < 8 && accept && (
+              <span className=" error">
+                A minimum of 8 characters is required
+              </span>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="PasswordRepeat">Password Repeat</label>
+            <input
+              value={passwordConfirmation}
+              onChange={(e) => setPasswordConfirmation(e.target.value)}
+              id="PasswordRepeat"
+              type="password"
+              placeholder="Password confirmation"
+              autoComplete="Password-Confirmation"
+              aria-hidden="true"
+            />
+
+            {passwordConfirmation !== password && accept && (
+              <span className="error">Password does not match</span>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="email">Email</label>
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+              type="email"
+              placeholder="E-mail"
+              required
+              autoComplete="new-Email"
+              aria-hidden="true"
+            />
+
+            {accept && emailError === 401 && (
+              <span className="error">The email has already been taken</span>
+            )}
+          </div>
+
+          <div>
+            <button className="btn "> Create User</button>
+          </div>
+        </form>
       </div>
-
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          value={password}
-          onChange={(e) => setpassword(e.target.value)}
-          id="password"
-          type="password"
-          placeholder="Password"
-          autoComplete="new-password"
-          aria-hidden="true"
-        />
-
-        {password.length < 8 && accept && (
-          <span className=" error">
-            A minimum of 8 characters is required
-          </span>
-        )}
-      </div>
-
-      <div>
-        <label htmlFor="PasswordRepeat">Password Repeat</label>
-        <input
-          value={passwordConfirmation}
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-          id="PasswordRepeat"
-          type="password"
-          placeholder="Password confirmation"
-          autoComplete="Password-Confirmation"
-          aria-hidden="true"
-        />
-
-        {passwordConfirmation !== password && accept && (
-          <span className="error">Password does not match</span>
-        )}
-      </div>
-
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          id="email"
-          type="email"
-          placeholder="E-mail"
-          required
-          autoComplete="new-Email"
-          aria-hidden="true"
-        />
-
-        {accept && emailError === 401 && (
-          <span className="error">The email has already been taken</span>
-        )}
-      </div>
-
-      <div>
-        <button className="btn "> Create User</button>
-      </div>
-    </form>
-  </div>
-      </div>
-
+    </div>
   );
 }
 

@@ -11,8 +11,11 @@ function Sidebar() {
       <div className="dashbord">
 
         <div className="btn-user" >
-        <Link to="/dashboard/users" >Users</Link>
-        <Link to="/dashboard/users/create" >Create new</Link>
+        <Link to="/dashboard/users" > <i className="fa-solid fa-users"></i>Users</Link>
+        <Link to="/dashboard/users/create" > <i className="fa-solid fa-user"></i>Create user </Link>
+
+        <Link to="products" > <i className="fa-solid fa-tarp-droplet"></i> Products</Link>
+        <Link to="products/create" >  <i className="fa-solid fa-plus"></i>create Product</Link>
         </div>
         <div className="container-users" >
           <Outlet/>

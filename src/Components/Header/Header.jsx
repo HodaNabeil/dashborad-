@@ -11,14 +11,13 @@ function Header() {
   
 
   async function handleLogOut () {
-    await axios.post("http://127.0.0.1:8000/api/logout" ,null , {
-      headers:{
-        Authorization: "Bearer " +  token,
-      }
+    await axios.post("http://127.0.0.1:8000/api/logout", null, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
     });
     cookie.remove("Bearer");
-    window.location.pathname="/"
-
+    window.location.pathname = "/";
   }
 
   return (

@@ -21,8 +21,13 @@
   cursor: pointer;
   font-weight: 600;
   display: block;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   padding: 10px;
+}
+
+.btn-user a  i {
+  margin-right: 15px;
+  color: var(--bg-color);
 }
 .container-users {
   flex-basis: 80%;
