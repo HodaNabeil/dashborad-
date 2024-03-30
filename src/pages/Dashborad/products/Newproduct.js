@@ -6,7 +6,7 @@ import axios from "axios";
 function Newproduct() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [iamge, setIamge] = useState("");
+  const [image, setIamge] = useState("");
 
   const [accept, setAccept] = useState(false);
 
@@ -26,12 +26,11 @@ function Newproduct() {
       const formDate = new FormData();
       formDate.append("title", title);
       formDate.append("description", description);
-      formDate.append("iamge", iamge);
+      formDate.append("image", image);
 
       const res = await axios.post(
         `http://127.0.0.1:8000/api/product/create`,
         formDate,
-        {},
         {
           headers: {
             Authorization: "Bearer " + token,
@@ -40,14 +39,12 @@ function Newproduct() {
       );
 
 
-      nav("/dashboard/users");
+      nav("/dashboard/products");
     } catch (error) {
       console.error("Registration failed:", error);
       setAccept(true);
     }
   }
-
-  console.log(iamge)
   return (
     <div className="container-form">
       <form onSubmit={sumbit}>
