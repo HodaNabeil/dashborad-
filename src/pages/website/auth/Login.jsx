@@ -50,13 +50,15 @@ function Login() {
       setAccept(true);
     }
   }
-
+  const height ={
+    height: "calc(100vh - 69px)",
+  }
   return (
     <>
       <Header />
 
-      <div className="container-form">
-        <form onSubmit={sumbit}>
+      <div   style={height} className="container-form">
+        <form onSubmit={sumbit} className="login">
           <div>
             <label htmlFor="password">Password</label>
             <input

@@ -12,6 +12,8 @@
 
 .logo {
   color: var(--seconed-color);
+  font-weight: 600;
+  cursor: pointer;
 }
 .nav-links {
   display: flex;

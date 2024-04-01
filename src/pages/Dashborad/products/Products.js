@@ -13,11 +13,10 @@ function Products() {
   const contextToken = useContext(UserContext);
   const token = contextToken.auth.token;
 
-
-
   const [products, setProducts] = useState([]);
 
   const [numberUserEffect, setNumberUserEffect] = useState(0);
+
   useEffect(() => {
     axios
       .get("http://127.0.0.1:8000/api/product/show", {
@@ -46,16 +45,14 @@ function Products() {
     }
   }
 
-
-
-
   return (
-    <table className="table-users">
+    <table className="container-table">
       <thead>
         <tr>
           <th>id</th>
-          <th>Name</th>
-          <th>Email</th>
+          <th>Title</th>
+
+          <th>description</th>
           <th>action</th>
         </tr>
       </thead>
@@ -64,8 +61,8 @@ function Products() {
           return (
             <tr key={index}>
               <td>{index + 1}</td>
-              <td>{product.name}</td>
-              <td>{product.email}</td>
+              <td>{product.title}</td>
+              <td>{product.description}</td>
               <td className="container-icons">
                 <div onClick={() => deletePoduct(product.id)}>
                   <i className="fa-solid fa-trash"></i>

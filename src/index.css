@@ -46,9 +46,46 @@
   padding-right:  50px;
 }
 
+
+
+/* Start Home */
+.landing-home {
+  height: calc(100vh - 69px);
+  width: 100%;
+background-color: var(--main-color);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-home h1 {
+  font-size:30px;
+  color: var(--seconed-color);
+  text-transform: capitalize;
+  position: relative;
+  transition: 0.3s all ;
+  --webkit-transition: 0.3s all;
+  --moz-transition: 0.3s all;
+  --o-transition: 0.3s all;
+  --ms-transition: 0.3s all;
+}
+.landing-home h1:hover::after  {
+  border-color: #b19470;
+}
+.landing-home h1::after {
+  content: "";
+  position: absolute;
+  left: -14px;
+  top: -8px;
+  width: 100%;
+  height: 100%;
+
+  border: 4px solid var(--seconed-color);
+  padding: 8px;
+  border-radius: 6px;
+}
 /* Form */
-
-
 .container-form {
   background-color:var(--main-color) ;
   width: 100%;
@@ -56,7 +93,6 @@
   display: flex;
   justify-content: center;
 }
-
 .container-form  form {
   background-color:#B19470; 
   width: 400px;
@@ -66,6 +102,12 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0px 0px 6px 2px #7d6951;
+}
+.container-form  form.register {
+  height: 400px;
+}
+.container-form  form.login {
+  height: 235px;
 }
 .container-form  form label {
   margin-bottom:10px ;
@@ -83,6 +125,25 @@
   color: var(--color-hover);
   font-size: 14px;
 }
+.container-form  form  input[type="file"] {
+  display: none;
+
+}
+
+.container-form  form label.imge {
+  width: 100%;
+  height: 20px;
+  background: var(--main-color);
+  text-align: center;
+  padding: 20px;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--seconed-color);
+  column-gap: 20px;
+  cursor: pointer;
+}
 .container-form  form .btn {
   background-color: var(--color-hover);
   color: var(--main-color);
@@ -96,4 +157,15 @@
 }
 .container-form  form .btn:hover {
   background-color: #76453B;
+}
+.update .container-form {
+  height: 500px;
+}
+
+
+
+@media (max-width:767px) {
+  .header-dashborad {
+    padding: 10px 30px;
+  }
 }

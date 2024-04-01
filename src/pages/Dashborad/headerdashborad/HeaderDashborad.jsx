@@ -1,17 +1,15 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
-import "./headerdashborad.css"
+import "./headerdashborad.css";
 function HeaderDashborad() {
   return (
     <div className="header-dashborad">
-       <Link to={"/"} >
-        Store
-       </Link>
-       <Link  className="btn" to="/">
+      <Link to={"/"}>Store</Link>
+      <Link className="btn" to="/">
         go to website
-       </Link>
+      </Link>
     </div>
-  )
+  );
 }
 
-export default HeaderDashborad
+export default HeaderDashborad;

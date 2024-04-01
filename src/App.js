@@ -9,8 +9,9 @@ import Users from "./pages/Dashborad/users/Users";
 import RequireAuth from "./pages/website/auth/RequireAuth";
 import PersistLogin from "./pages/website/auth/PersistLogin";
 import Newproduct from "./pages/Dashborad/products/Newproduct";
-import UpdateProdcuts from "./pages/Dashborad/products/UpdateProdcuts";
+
 import Products from "./pages/Dashborad/products/Products";
+import UpdateProduct from "./pages/Dashborad/products/UpdateProduct";
 
 
 function App() {
@@ -21,8 +22,6 @@ function App() {
           <Route path="/register" element={<Register/>} />
           <Route path="/login"  element={<Login/>}/>
 
-
-        {/*  */}
         <Route element={<PersistLogin/>}>
           <Route element={<RequireAuth/>}>
             <Route path="/dashboard" element={<Dashbord/>} >
@@ -30,11 +29,9 @@ function App() {
                 <Route path="users/:id" element={<Updateuser/>} />
                 <Route path="users/create" element={<Createuser/>} />
 
-
                 {/* Products */}
-
                 <Route path="products" element={<Products/>} />
-                <Route path="products/:id" element={<UpdateProdcuts/>} />
+                <Route path="products/:id" element={<UpdateProduct/>} />
                 <Route path="products/create" element={<Newproduct/>} />
       
             </Route>

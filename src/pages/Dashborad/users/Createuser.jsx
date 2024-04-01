@@ -53,7 +53,7 @@ function CreateUser() {
   }
 
   return (
-    <div className="container-form">
+    <div    className="container-form  ">
     <form onSubmit={sumbit}>
       <div>
         <label htmlFor="name">Name</label>

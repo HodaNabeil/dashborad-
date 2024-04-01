@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
-import { UserContext } from "../../../context/Usecontext";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../../context/Usecontext";
 import axios from "axios";
 
-function Newproduct() {
+function UpdateProduct() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setIamge] = useState("");
@@ -13,8 +13,22 @@ function Newproduct() {
   const contextToken = useContext(UserContext);
 
   const token = contextToken.auth.token;
-
+  const id = window.location.pathname.split("/").slice(-1)[0];
   const nav = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get(`http://127.0.0.1:8000/api/product/showbyid/${id}`, {
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((date) => {
+        setTitle(date.data[0].title);
+        setDescription(date.data[0].description);
+      });
+  }, []);
 
   async function sumbit(e) {
     e.preventDefault();
@@ -28,7 +42,7 @@ function Newproduct() {
       formDate.append("image", image);
 
       const res = await axios.post(
-        `http://127.0.0.1:8000/api/product/create`,
+        `http://127.0.0.1:8000/api/product/update/${id}`,
         formDate,
         {
           headers: {
@@ -81,9 +95,9 @@ function Newproduct() {
         </div>
 
         <div>
-          <label className="imge" htmlFor="iamge">
-            <img src={require(`../../../IMg/image-gallery.png`)} alt="" />
-            <span> Image</span>
+          <label className="imge" htmlFor="iamge">  
+          <img src={require(`../../../IMg/image-gallery.png`)} alt="" />
+          <span>  Image</span>
           </label>
           <input
             onChange={(e) => setIamge(e.target.files.item(0))}
@@ -96,11 +110,11 @@ function Newproduct() {
         </div>
 
         <div>
-          <button className="btn "> Create Product</button>
+          <button className="btn "> Update </button>
         </div>
       </form>
     </div>
   );
 }
 
-export default Newproduct;
+export default UpdateProduct;

@@ -1,11 +1,8 @@
-
 import Header from "../../../Components/Header/Header";
 
-
-
-import { useContext,  useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
-import {  UserContext } from "../../../context/Usecontext";
+import { UserContext } from "../../../context/Usecontext";
 import { useNavigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 
@@ -19,14 +16,11 @@ function Register() {
 
   const usernew = useContext(UserContext);
 
+  // Cookeis
 
-  // Cookeis 
+  const cookie = new Cookies();
 
-  const  cookie = new Cookies()
-
-  
-
-  const  nav =useNavigate()
+  const nav = useNavigate();
 
   async function sumbit(e) {
     e.preventDefault();
@@ -40,19 +34,15 @@ function Register() {
         password: password,
         password_confirmation: passwordConfirmation,
       });
-    
-    
+
       const token = res.data.data.token;
 
-      const  userDetails = res.data.data.user;
+      const userDetails = res.data.data.user;
 
+      usernew.setAuth({ token, userDetails });
 
-      console.log(token)
-      
-      usernew.setAuth({token,userDetails }) 
-  
-      cookie.set("Bearer" ,token ,{path:"/dashboard/users"});
-      nav("/dashboard"); 
+      cookie.set("Bearer", token, { path: "/dashboard/users" });
+      nav("/dashboard");
     } catch (error) {
       console.error("Registration failed:", error);
       if (error.response && error.response.status === 401) {
@@ -60,15 +50,17 @@ function Register() {
       }
       setAccept(true);
     }
-    
+  }
+  const height ={
+    height: "calc(100vh - 69px)",
   }
 
   return (
     <>
       <Header />
 
-      <div className="container-form">
-        <form onSubmit={sumbit}>
+      <div   style={height}   className="container-form ">
+        <form onSubmit={sumbit} className="register">
           <div>
             <label htmlFor="name">Name</label>
             <input
@@ -79,7 +71,7 @@ function Register() {
               placeholder="Name"
               aria-hidden="true"
             />
-            {name.length < 2  && accept && (
+            {name.length < 2 && accept && (
               <span className="error">Name required</span>
             )}
           </div>

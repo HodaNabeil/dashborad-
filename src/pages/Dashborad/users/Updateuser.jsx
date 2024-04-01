@@ -65,9 +65,9 @@ function Updateuser() {
 
   return (
     <div className=" page-update-user">
-      <h3>Updating data</h3>
+      <h3 >Updating data</h3>
       <div className="container-form">
-        <form onSubmit={sumbit}>
+        <form onSubmit={sumbit}   style={{margin:"50px  0 0"}}>
           <div>
             <label htmlFor="name">Name</label>
             <input

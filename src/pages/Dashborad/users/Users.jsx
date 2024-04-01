@@ -10,8 +10,6 @@ function Users() {
   const contextToken = useContext(UserContext);
   const token = contextToken.auth.token;
 
-
-
   const [users, setUsers] = useState([]);
 
   const [numberUserEffect, setNumberUserEffect] = useState(0);
@@ -43,11 +41,8 @@ function Users() {
     }
   }
 
-
-
-
   return (
-    <table className="table-users">
+    <table className="container-table">
       <thead>
         <tr>
           <th>id</th>
@@ -76,9 +71,6 @@ function Users() {
             </tr>
           );
         })}
-
-
-
       </tbody>
     </table>
   );
